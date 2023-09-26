@@ -6,5 +6,7 @@
 
 ### Helpful Resources
 
+- https://medium.com/codex/collecting-image-data-for-machine-learning-in-python-6334474d0e23
+
 List of common birdfeeder birds for different regions
 - https://feederwatch.org/learn/common-feeder-birds
