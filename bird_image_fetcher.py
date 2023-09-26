@@ -8,6 +8,7 @@ config = dotenv_values(".env")
 BIRD_LIST_FILE = "us_northeast_feeder_birds.txt"
 BIRD_IMAGES_DIR = 'bird_images'
 FLICKR_DEFAULT_PHOTO_URL_TEMPLATE = "https://farm{}.staticflickr.com/{}/{}_{}.jpg"
+NUM_IMAGES_PER_BIRD = 10
 
 flickr = flickrapi.FlickrAPI(
   config["FLICKR_API_KEY"], 
@@ -20,7 +21,7 @@ def main():
       bird_names = f.read().splitlines()
     
     for bird_name in bird_names:
-      search_flickr_for_bird(bird_name, 1)
+      search_flickr_for_bird(bird_name, NUM_IMAGES_PER_BIRD)
       print(f"Searching for {bird_name} on Flickr...")
 
   except FileNotFoundError:
