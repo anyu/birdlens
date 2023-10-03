@@ -30,4 +30,4 @@ percent = prob[n]*100
 print(f"{percent:.02f}% confident.")
 
 # Export fine-tuned model
-learn.export('model.pkl')
+learn.export('birdlens_resnet_34_model.pkl')
