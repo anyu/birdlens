@@ -1,4 +1,4 @@
-import smtplib
+import smtplib, os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
@@ -22,7 +22,8 @@ class EmailSender:
 
     msg.attach(MIMEText(message_body, 'plain'))
     attachment = open(image_path, 'rb')
-    image = MIMEImage(attachment.read(), name='image.jpg')
+    filename = os.path.basename(image_path)
+    image = MIMEImage(attachment.read(), name=filename)
     attachment.close()
     msg.attach(image)
 
@@ -32,7 +33,7 @@ class EmailSender:
       server.login(self.sender_email, self.sender_password)
 
       server.sendmail(self.sender_email, self.recipient_email, msg.as_string())
-      print("Email sent successfully!")
+      print("Email sent successfully.")
 
     except Exception as e:
       print(f"Error: {str(e)}")
