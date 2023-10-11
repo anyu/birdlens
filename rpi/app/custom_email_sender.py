@@ -21,11 +21,17 @@ class EmailSender:
     msg['Subject'] = subject
 
     msg.attach(MIMEText(message_body, 'plain'))
-    attachment = open(image_path, 'rb')
+
+    with open(image_path, "rb") as image_file:
+      attachment = image_file.read()
+
     filename = os.path.basename(image_path)
-    image = MIMEImage(attachment.read(), name=filename)
-    attachment.close()
-    msg.attach(image)
+
+    image = MIMEImage(img, name=filename)
+    image.add_header('Content-Disposition', 'attachment; filename="%s"' % filename)
+    image.add_header('Content-ID', '<%s>' % filename)
+    image.add_header('Content-Type', 'image/jpeg')
+    msg.attach(attachment)
 
     try:
       server = smtplib.SMTP(smtp_server, smtp_port)
